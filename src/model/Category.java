@@ -2,24 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package entity;
+package model;
 
 /**
  *
  * @author hadac
  */
-public class categoryEntity {
+public class Category {
+
     private int maDM;
     private String tenDM;
     private String mota;
 
-    public categoryEntity() {
+    public Category() {
     }
 
-    public categoryEntity(int maDM, String tenDM, String mota) {
-        this.maDM = maDM;
-        this.tenDM = tenDM;
-        this.mota = mota;
+    public String toString() {
+        return getTenDM(); 
+        //Thay thế bằng phương thức lấy tên danh mục của bạn
     }
 
     public int getMaDM() {
@@ -38,7 +38,6 @@ public class categoryEntity {
         this.tenDM = tenDM;
     }
 
-   
     public String getMota() {
         return mota;
     }
@@ -47,9 +46,8 @@ public class categoryEntity {
         this.mota = mota;
     }
 
-    @Override
-    public String toString() {
-        return "categoryEntity{" + "maDM=" + maDM + ", tenDM=" + tenDM + ", mota=" + mota + '}';
-    }
     
+
+   
+
 }

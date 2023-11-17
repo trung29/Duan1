@@ -17,7 +17,7 @@ public class main extends javax.swing.JFrame {
      */
     public main() {
         initComponents();
-    
+
     }
 
     @SuppressWarnings("unchecked")
@@ -186,17 +186,16 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-  product p = new product();
-  jDesktopPane1.add(p).setVisible(true);
-  
+        product p = new product();
+        jDesktopPane1.add(p).setVisible(true);
+
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-      category c = new category();
-      jDesktopPane1.add(c).setVisible(true);
+        category c = new category();
+        jDesktopPane1.add(c).setVisible(true);
     }//GEN-LAST:event_jLabel4MouseClicked
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -4,8 +4,8 @@
  */
 package view;
 
-import dao.categoryDAO;
-import entity.categoryEntity;
+import Respon.categoryRes;
+import model.Category;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class category extends javax.swing.JInternalFrame {
 
-    categoryDAO dao = new categoryDAO();
+    categoryRes dao = new categoryRes();
     String findByName = "";
     int idcate = -1;
    
@@ -31,7 +31,7 @@ public class category extends javax.swing.JInternalFrame {
     public void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblCategory.getModel();
         model.setRowCount(0);
-        for (categoryEntity cate : dao.findByName(findByName)) {
+        for (Category cate : dao.findByName(findByName)) {
             Object rowData[] = new Object[3];
             rowData[0] = cate.getMaDM();
             rowData[1] = cate.getTenDM();
@@ -40,21 +40,21 @@ public class category extends javax.swing.JInternalFrame {
         }
     }
 
-    public categoryEntity getModel() {
-        categoryEntity cate = new categoryEntity();
+    public Category getModel() {
+        Category cate = new Category();
         cate.setTenDM(txttendm.getText().toString().trim());
         cate.setMota(txtmota.getText().toString().trim());
         return cate;
     }
 
-    public void setModel(categoryEntity c) {
+    public void setModel(Category c) {
         txtid.setText(String.valueOf(c.getMaDM()));
         txttendm.setText(c.getTenDM());
         txtmota.setText(c.getMota());
     }
 
-    public categoryEntity update() {
-        categoryEntity cate = new categoryEntity();
+    public Category update() {
+        Category cate = new Category();
         cate.setMaDM(Integer.parseInt(txtid.getText().toString()));
         cate.setTenDM(txttendm.getText().toString().trim());
         cate.setMota(txtmota.getText().toString().trim());
@@ -266,7 +266,7 @@ public class category extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-//        categoryEntity cate = getModel();
+//        Category cate = getModel();
 //        if (dao.findById(txttendm.getText()) != null) {
 //            JOptionPane.showMessageDialog(this, "Danh mục đã tồn tại");
 //        } else {
@@ -276,7 +276,7 @@ public class category extends javax.swing.JInternalFrame {
 //            }
 //        }
         try {
-            categoryEntity cate = getModel();
+            Category cate = getModel();
             if (dao.add(cate) > 0) {
                 JOptionPane.showMessageDialog(this, "Thêm mới thành công ");
                 fillTable();
@@ -292,7 +292,7 @@ public class category extends javax.swing.JInternalFrame {
         txtid.setEnabled(false);
         int position = tblCategory.rowAtPoint(evt.getPoint());
         idcate = Integer.parseInt(tblCategory.getValueAt(position, 0).toString());
-        categoryEntity cate = dao.findById(idcate);
+        Category cate = dao.findById(idcate);
         if (cate != null) {
             setModel(cate);
         }
@@ -311,7 +311,7 @@ public class category extends javax.swing.JInternalFrame {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
 
         try {
-            categoryEntity c = update();
+            Category c = update();
             if (dao.update(c) > 0) {
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công thành công ");
                 fillTable();

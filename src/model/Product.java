@@ -2,28 +2,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package entity;
+package model;
 
 /**
  *
  * @author hadac
  */
-public class productEnitty {
+public class Product {
+
     private int maSP;
     private String tenSP;
-    private int soluong;
+    private boolean trangthai;
     private double gia;
-    private categoryEntity maDM;
+    private int maDM;
+    private String mota;
 
-    public productEnitty() {
+    public Product() {
     }
 
-    public productEnitty(int maSP, String tenSP, int soluong, double gia, categoryEntity maDM) {
+    public Product(int maSP, String tenSP, boolean trangthai, double gia, int maDM, String mota) {
         this.maSP = maSP;
         this.tenSP = tenSP;
-        this.soluong = soluong;
+        this.trangthai = trangthai;
         this.gia = gia;
         this.maDM = maDM;
+        this.mota = mota;
+    }
+
+    public String getMota() {
+        return mota;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
     }
 
     public int getMaSP() {
@@ -42,12 +53,12 @@ public class productEnitty {
         this.tenSP = tenSP;
     }
 
-    public int getSoluong() {
-        return soluong;
+    public boolean isTrangthai() {
+        return trangthai;
     }
 
-    public void setSoluong(int soluong) {
-        this.soluong = soluong;
+    public void setTrangthai(boolean trangthai) {
+        this.trangthai = trangthai;
     }
 
     public double getGia() {
@@ -58,12 +69,12 @@ public class productEnitty {
         this.gia = gia;
     }
 
-    public categoryEntity getMaDM() {
+    public int getMaDM() {
         return maDM;
     }
 
-    public void setMaDM(categoryEntity maDM) {
+    public void setMaDM(int maDM) {
         this.maDM = maDM;
     }
-    
+
 }
