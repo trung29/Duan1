@@ -280,7 +280,7 @@ public class main extends javax.swing.JFrame {
         if (ShareUntil.USER.isRole() == false) {
             JOptionPane.showMessageDialog(this, "Không có quyền sử dụng");
         } else {
-            staff1 s = new staff1();
+            staff s = new staff();
             jDesktopPane1.add(s).setVisible(true);
         }
     }//GEN-LAST:event_jLabel9MouseClicked

@@ -13,12 +13,12 @@ import model.Staff;
  *
  * @author PC
  */
-public class staff1 extends javax.swing.JInternalFrame {
+public class staff extends javax.swing.JInternalFrame {
 
     private final staffRes dn = new staffRes();
     DefaultTableModel model = new DefaultTableModel();
 
-    public staff1() {
+    public staff() {
         initComponents();
         model = (DefaultTableModel) tblNhanVien.getModel();
         fillTable();
@@ -46,7 +46,7 @@ public class staff1 extends javax.swing.JInternalFrame {
 
     }
 
-    private void showDetail(Staff n) {
+    private void showDetail() {
         int index = tblNhanVien.getSelectedRow();
         txtMa.setText(tblNhanVien.getValueAt(index, 0).toString());
         txtTen.setText(tblNhanVien.getValueAt(index, 1).toString());
@@ -145,6 +145,11 @@ public class staff1 extends javax.swing.JInternalFrame {
         });
 
         jButton9.setText("Xóa");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -342,7 +347,7 @@ public class staff1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int index = tblNhanVien.getSelectedRow();
         Staff n = dn.getAllNhanVien().get(index);
-        showDetail(n);
+        showDetail();
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -377,6 +382,40 @@ public class staff1 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Lỗi sửa!");
         }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        try {
+            int index = tblNhanVien.getSelectedRow();
+            if (index < 0) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng để xoá!");
+                return;
+            }
+            if (tblNhanVien.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Hết dữ liệu để xoá!");
+                return;
+            }
+            int hoi = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá không?");
+            if (hoi != JOptionPane.YES_OPTION) {
+                return;
+            }
+            int maNV = dn.getAllNhanVien().get(index).getMaNV();
+            if (dn.delNhanVien(maNV) > 0) {
+                JOptionPane.showMessageDialog(this, "Xoá thành công!");
+                fillTable();
+                if (tblNhanVien.getRowCount() > 0) {
+                    tblNhanVien.setRowSelectionInterval(0, 0);
+                    showDetail();
+                } else {
+                    clear();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Xoá thất bại!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi xoá!");
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

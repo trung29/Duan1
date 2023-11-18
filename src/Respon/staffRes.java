@@ -62,7 +62,7 @@ public class staffRes {
             sttm.setBoolean(4, s.isGioitinh());
             sttm.setString(5, s.getPassword());
             sttm.setBoolean(6, s.isRole());
-            
+
             int rowsAffected = sttm.executeUpdate();
             if (rowsAffected > 0) {
                 return 1;
@@ -71,5 +71,62 @@ public class staffRes {
             e.printStackTrace();
         }
         return -1;
+    }
+//    public int UpdateStaff(Staff s) {
+//        try {
+//            String sql = "UPDATE nhanvien SET TenNV = ?, email = ?, sdt = ?, gioitinh = ?, password =?, role = ? where maNV=?";
+//            con = DatabaseHelper.getDBConnect();
+//            sttm = con.prepareStatement(sql);
+//
+//            sttm.setString(1, s.getTenNV());
+//            sttm.setString(2, s.getEmail());
+//            sttm.setString(3, s.getSdt());
+//            sttm.setBoolean(4, s.isGioitinh());
+//            sttm.setString(5, s.getPassword());
+//            sttm.setBoolean(6, s.isRole());
+//            sttm.setString(7, String.valueOf(s.getMaNV()));
+//            
+//            int rowsAffected = sttm.executeUpdate();
+//            if (rowsAffected > 0) {
+//                return 1;
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("Error: " + e.toString());
+//            e.printStackTrace();
+//        }
+//        return -1;
+//    }
+
+    public Integer updateNhanVien(Staff s, int maNV) {
+        Integer row = null;
+        try {
+            String sql = "UPDATE nhanvien SET TenNV = ?, email = ?, sdt = ?, gioitinh = ?, password =?, role = ? where maNV=?";
+            con = DatabaseHelper.getDBConnect();
+            sttm = con.prepareStatement(sql);
+            sttm.setString(1, s.getTenNV());
+            sttm.setString(2, s.getEmail());
+            sttm.setString(3, s.getSdt());
+            sttm.setBoolean(4, s.isGioitinh());
+            sttm.setString(5, s.getPassword());
+            sttm.setBoolean(6, s.isRole());
+            sttm.setInt(7, maNV);
+            row = sttm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return row;
+    }
+      public Integer delNhanVien(int maNV) {
+        Integer row = null;
+        try {
+            String sql = "delete from nhanvien where maNV = ?";
+            con = DatabaseHelper.getDBConnect();
+            sttm = con.prepareStatement(sql);
+            sttm.setInt(1, maNV);
+            row = sttm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return row;
     }
 }
