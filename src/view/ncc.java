@@ -5,8 +5,11 @@
 package view;
 
 import Respon.NccRes;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Category;
 import model.Ncc;
+import model.Product;
 
 /**
  *
@@ -19,13 +22,13 @@ public class ncc extends javax.swing.JInternalFrame {
      */
     private final NccRes dn = new NccRes();
     DefaultTableModel model = new DefaultTableModel();
-
+    
     public ncc() {
         initComponents();
         model = (DefaultTableModel) tbl_NCC.getModel();
         fillTable();
     }
-
+    
     public void fillTable() {
         model.setRowCount(0);
         for (Ncc n : dn.getAllNCC()) {
@@ -35,9 +38,30 @@ public class ncc extends javax.swing.JInternalFrame {
             model.addRow(data);
         }
     }
-
+    
+    public Ncc getModel() {
+        Ncc n = new Ncc();
+        n.setTenNCC(txtten.getText());
+        n.setEmail(txt_email.getText());
+        n.setSdt(txt_sdt.getText());
+        
+        return n;
+    }
+    
+    public Ncc getModel_1() {
+        Ncc n = new Ncc();
+        n.setMaNCC(Integer.parseInt(txtid.getText()));
+        n.setTenNCC(txtten.getText());
+        n.setEmail(txt_email.getText());
+        n.setSdt(txt_sdt.getText());
+        return n;
+    }
+    
     public void clear() {
-   
+        txtid.setText("");
+        txtten.setText("");
+        txt_email.setText("");
+        txt_sdt.setText("");
     }
 
     /**
@@ -166,8 +190,8 @@ public class ncc extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_sdt, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                             .addComponent(txt_email)
-                            .addComponent(txtten, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))))
-                .addContainerGap(65, Short.MAX_VALUE))
+                            .addComponent(txtten))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +214,7 @@ public class ncc extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tr)
                     .addComponent(txt_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,11 +243,10 @@ public class ncc extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,8 +255,8 @@ public class ncc extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 309, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -242,27 +265,56 @@ public class ncc extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-
+        Ncc n = getModel();
+        try {
+            if (dn.AddNCC(n) > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm mới thành công");
+                fillTable();
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "Thêm mới không thành công");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-
+        Ncc n = getModel();
+        try {
+            if (dn.UpdateNCC(n) > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                fillTable();
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "Cập nhật không thành công");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-
+        Ncc n = getModel_1();
+        if (dn.Delete(n.getMaNCC()) > 0) {
+            JOptionPane.showMessageDialog(this, "Delete thành công");
+            fillTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Delete thất bại");
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void txt_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_emailActionPerformed
@@ -278,11 +330,7 @@ public class ncc extends javax.swing.JInternalFrame {
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         // TODO add your handling code here:
-            txtid.setText("");
-            System.out.println("trung");
-        txtten.setText("");
-        txt_email.setText("");
-        txt_sdt.setText("");
+        clear();
     }//GEN-LAST:event_btn_clearActionPerformed
     public void showDetail(Ncc n) {
         txtid.setText(String.valueOf(n.getMaNCC()));
