@@ -6,19 +6,22 @@ package connect;
 
 //import model.nhanvien;
 
+import model.Staff;
+
+
 /**
  *
  * @author hadac
  */
 public class ShareUntil {
-//    public static nhanvien USER = null;
-//    
-//    public static void logoff(){
-//        ShareUntil.USER = null;
-//    }
-//    
-//    public static boolean authenticated(){
-//        return ShareUntil.USER != null;
-//    }
+    public static Staff USER = null;
+    
+    public static void logoff(){
+        ShareUntil.USER = null;
+    }
+    
+    public static boolean authenticated(){
+        return ShareUntil.USER != null;
+    }
     
 }
