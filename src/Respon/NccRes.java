@@ -63,13 +63,14 @@ public class NccRes {
 
     public int UpdateNCC(Ncc n) {
         try {
-            String sql = "UPDATE NhaCC SET TenNCC = ?, email = ?, sdt = ?";
+            String sql = "UPDATE NhaCC SET TenNCC = ?, email = ?, sdt = ? where maNCC=?";
             con = DatabaseHelper.getDBConnect();
             sttm = con.prepareStatement(sql);
 
             sttm.setString(1, n.getTenNCC());
             sttm.setString(2, n.getEmail());
-            sttm.setString(3, n.getSdt());  // Sử dụng setDouble cho giá
+            sttm.setString(3, n.getSdt());
+            sttm.setString(4, String.valueOf(n.getMaNCC()));
             int rowsAffected = sttm.executeUpdate();
             if (rowsAffected > 0) {
                 return 1;
