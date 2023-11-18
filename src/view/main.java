@@ -277,12 +277,12 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-//        if (ShareUntil.USER.isRole() == false) {
-//            JOptionPane.showMessageDialog(this, "Không có quyền sử dụng");
-//        } else {
-//            staff s = new staff();
-//            jDesktopPane1.add(s).setVisible(true);
-//        }
+        if (ShareUntil.USER.isRole() == false) {
+            JOptionPane.showMessageDialog(this, "Không có quyền sử dụng");
+        } else {
+            staff1 s = new staff1();
+            jDesktopPane1.add(s).setVisible(true);
+        }
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
