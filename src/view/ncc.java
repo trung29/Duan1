@@ -279,6 +279,7 @@ public class ncc extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         Ncc n = getModel();
+        System.out.println("HauNgu");
         try {
             if (dn.AddNCC(n) > 0) {
                 JOptionPane.showMessageDialog(this, "Thêm mới thành công");

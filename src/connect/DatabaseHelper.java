@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author hadac
  */
 public class DatabaseHelper {
-  public static String connectionUrl = "jdbc:sqlserver://localhost;databaseName=PRO1041;user=sa;password=hhaauu2714;encrypt=false";
+  public static String connectionUrl = "jdbc:sqlserver://localhost;databaseName=PRO1041;user=sa;password=12345;encrypt=false";
     public static Connection getDBConnect(){
         Connection conn = null;
         try{
