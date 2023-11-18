@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Ncc;
 import model.Staff;
 
 /**
@@ -17,7 +18,8 @@ import model.Staff;
  * @author hadac
  */
 public class staffRes {
-     Connection con = null;
+
+    Connection con = null;
     PreparedStatement sttm = null;
     ResultSet rs = null;
 
@@ -45,5 +47,29 @@ public class staffRes {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public Integer AddStaff(Staff s) {
+        try {
+            String sql = "insert into nhanvien values (?,?,?,?,?,?);";
+            con = DatabaseHelper.getDBConnect();
+            sttm = con.prepareStatement(sql);
+
+            //sttm.setInt(1, s.getMaNV());
+            sttm.setString(1, s.getTenNV());
+            sttm.setString(2, s.getEmail());
+            sttm.setString(3, s.getSdt());
+            sttm.setBoolean(4, s.isGioitinh());
+            sttm.setString(5, s.getPassword());
+            sttm.setBoolean(6, s.isRole());
+            
+            int rowsAffected = sttm.executeUpdate();
+            if (rowsAffected > 0) {
+                return 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }

@@ -5,6 +5,7 @@
 package view;
 
 import Respon.staffRes;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Staff;
 
@@ -39,7 +40,7 @@ public class staff1 extends javax.swing.JInternalFrame {
         txtSdt.setText("");
         txtmk.setText("");
         rdoNu.setSelected(true);
-        cborole.setSelectedIndex(0);
+        rdoQL.setSelected(true);
         tblNhanVien.clearSelection();
 
     }
@@ -53,7 +54,20 @@ public class staff1 extends javax.swing.JInternalFrame {
         rdoNam.setSelected(gt);
         rdoNu.setSelected(!gt);
         txtmk.setText(tblNhanVien.getValueAt(index, 5).toString());
-        cborole.setSelectedItem(tblNhanVien.getValueAt(index, 6));
+        boolean cv = tblNhanVien.getValueAt(index, 6).toString().equalsIgnoreCase("Quan Ly")?true:false;
+        rdoQL.setSelected(cv);
+        rdoNV.setSelected(!cv);
+    }
+        private Staff getNVFormInput() {
+        Staff s = new Staff();
+        //s.setMaNV(Integer.parseInt(txtMa.getText()));
+        s.setTenNV(txtTen.getText());
+        s.setEmail(txtEmail.getText());
+        s.setSdt(txtSdt.getText());
+        s.setGioitinh(rdoNam.isSelected() ? true : false);
+        s.setPassword(txtmk.getText());
+        s.setRole(rdoQL.isSelected() ? true : false);
+        return s;
     }
 
     /**
@@ -66,6 +80,7 @@ public class staff1 extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -77,7 +92,6 @@ public class staff1 extends javax.swing.JInternalFrame {
         txtTen = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtSdt = new javax.swing.JTextField();
-        cborole = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         txtmk = new javax.swing.JTextField();
         rdoNam = new javax.swing.JRadioButton();
@@ -85,7 +99,9 @@ public class staff1 extends javax.swing.JInternalFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        rdoQL = new javax.swing.JRadioButton();
+        rdoNV = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblNhanVien = new javax.swing.JTable();
         jTextField10 = new javax.swing.JTextField();
@@ -102,8 +118,6 @@ public class staff1 extends javax.swing.JInternalFrame {
         jLabel13.setText("Mật khẩu");
 
         jLabel14.setText("Chức vụ");
-
-        cborole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1" }));
 
         jLabel16.setText("Giới tính");
 
@@ -124,12 +138,18 @@ public class staff1 extends javax.swing.JInternalFrame {
 
         jButton9.setText("Xóa");
 
-        jButton6.setText("Thêm");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
+
+        buttonGroup2.add(rdoQL);
+        rdoQL.setText("Quản lý");
+
+        buttonGroup2.add(rdoNV);
+        rdoNV.setText("Nhân viên");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -166,24 +186,25 @@ public class staff1 extends javax.swing.JInternalFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(rdoNam)
                                 .addGap(46, 46, 46)
-                                .addComponent(rdoNu)
-                                .addContainerGap(157, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(cborole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(55, 55, 55))))))
+                                .addComponent(rdoNu))
+                            .addComponent(rdoQL))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jButton6)
+                .addComponent(btnThem)
                 .addGap(18, 18, 18)
                 .addComponent(jButton7)
                 .addGap(18, 18, 18)
-                .addComponent(jButton9)
-                .addGap(18, 18, 18)
-                .addComponent(jButton8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rdoNV)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton9)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton8)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton6, jButton7, jButton8, jButton9});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnThem, jButton7, jButton8, jButton9});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,18 +236,19 @@ public class staff1 extends javax.swing.JInternalFrame {
                     .addComponent(rdoNu))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cborole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
+                    .addComponent(jLabel14)
+                    .addComponent(rdoQL)
+                    .addComponent(rdoNV))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
+                    .addComponent(btnThem)
                     .addComponent(jButton7)
                     .addComponent(jButton9)
                     .addComponent(jButton8))
                 .addGap(32, 32, 32))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton6, jButton7, jButton8, jButton9});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnThem, jButton7, jButton8, jButton9});
 
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -281,15 +303,27 @@ public class staff1 extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+        Staff n = getNVFormInput();
+        try {
+            if (dn.AddStaff(n) > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm mới thành công");
+                fillTable();
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "Thêm mới không thành công");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
@@ -309,10 +343,10 @@ public class staff1 extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnThem;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cborole;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -326,8 +360,10 @@ public class staff1 extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField10;
+    private javax.swing.JRadioButton rdoNV;
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
+    private javax.swing.JRadioButton rdoQL;
     private javax.swing.JTable tblNhanVien;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMa;
