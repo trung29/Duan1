@@ -23,11 +23,12 @@ public class staff1 extends javax.swing.JInternalFrame {
         model = (DefaultTableModel) tblNhanVien.getModel();
         fillTable();
     }
-      public void fillTable() {
+
+    public void fillTable() {
         model.setRowCount(0);
         for (Staff n : dn.getAllNhanVien()) {
             Object data[] = {
-                n.getMaNV(), n.getTenNV(), n.getEmail(), n.getSdt(),n.isGioitinh()?"Nam" : "Nu",n.getPassword(),n.isRole()?"Nhan vien" : "Quan Ly"
+                n.getMaNV(), n.getTenNV(), n.getEmail(), n.getSdt(), n.isGioitinh() ? "Nam" : "Nu", n.getPassword(), n.isRole() ? "Nhan vien" : "Quan Ly"
             };
             model.addRow(data);
         }
@@ -44,21 +45,23 @@ public class staff1 extends javax.swing.JInternalFrame {
         tblNhanVien.clearSelection();
 
     }
+
     private void showDetail(Staff n) {
         int index = tblNhanVien.getSelectedRow();
         txtMa.setText(tblNhanVien.getValueAt(index, 0).toString());
         txtTen.setText(tblNhanVien.getValueAt(index, 1).toString());
         txtEmail.setText(tblNhanVien.getValueAt(index, 2).toString());
         txtSdt.setText(tblNhanVien.getValueAt(index, 3).toString());
-        boolean gt = tblNhanVien.getValueAt(index, 4).toString().equalsIgnoreCase("Nu")?true:false;
+        boolean gt = tblNhanVien.getValueAt(index, 4).toString().equalsIgnoreCase("Nu") ? true : false;
         rdoNam.setSelected(gt);
         rdoNu.setSelected(!gt);
         txtmk.setText(tblNhanVien.getValueAt(index, 5).toString());
-        boolean cv = tblNhanVien.getValueAt(index, 6).toString().equalsIgnoreCase("Quan Ly")?true:false;
+        boolean cv = tblNhanVien.getValueAt(index, 6).toString().equalsIgnoreCase("Quan Ly") ? true : false;
         rdoQL.setSelected(cv);
         rdoNV.setSelected(!cv);
     }
-        private Staff getNVFormInput() {
+
+    private Staff getNVFormInput() {
         Staff s = new Staff();
         //s.setMaNV(Integer.parseInt(txtMa.getText()));
         s.setTenNV(txtTen.getText());
@@ -128,6 +131,11 @@ public class staff1 extends javax.swing.JInternalFrame {
         rdoNu.setText("Nam");
 
         jButton7.setText("Sửa");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Làm mới");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -317,7 +325,7 @@ public class staff1 extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Thêm mới thành công");
                 fillTable();
             } else {
-                
+
                 JOptionPane.showMessageDialog(this, "Thêm mới không thành công");
             }
         } catch (Exception e) {
@@ -340,6 +348,35 @@ public class staff1 extends javax.swing.JInternalFrame {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+//        Staff n = getNVFormInput();
+//        try {
+//            if (dn.UpdateStaff(n) > 0) {
+//                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+//                fillTable();
+//            } else {
+//                
+//                JOptionPane.showMessageDialog(this, "Cập nhật không thành công");
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+        int index = tblNhanVien.getSelectedRow();
+        try {
+            Staff nv = getNVFormInput();
+            int maNV = dn.getAllNhanVien().get(index).getMaNV();
+            if (dn.updateNhanVien(nv, maNV) > 0) {
+                JOptionPane.showMessageDialog(this, "Sửa thành công!");
+                fillTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa thất bại!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi sửa!");
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
