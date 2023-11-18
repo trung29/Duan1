@@ -279,6 +279,7 @@ public class ncc extends javax.swing.JInternalFrame {
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         // TODO add your handling code here:
             txtid.setText("");
+            System.out.println("trung");
         txtten.setText("");
         txt_email.setText("");
         txt_sdt.setText("");
