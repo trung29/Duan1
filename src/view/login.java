@@ -10,13 +10,16 @@ import connect.ShareUntil;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import model.Staff;
+
 /**
  *
  * @author hadac
  */
 public class login extends javax.swing.JFrame {
-private loginRes lDAO = new loginRes();
+
+    private loginRes lDAO = new loginRes();
     private Staff sE;
+
     /**
      * Creates new form login
      */
@@ -56,8 +59,15 @@ private loginRes lDAO = new loginRes();
         jLabel3.setText("Mật khẩu :");
 
         txttk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txttk.setText("0374269862");
 
         txtmk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtmk.setText("123456");
+        txtmk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmkActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Đăng nhập");
@@ -153,6 +163,10 @@ private loginRes lDAO = new loginRes();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtmkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmkActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmkActionPerformed
 
     /**
      * @param args the command line arguments
