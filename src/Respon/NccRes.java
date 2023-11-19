@@ -40,6 +40,36 @@ public class NccRes {
         }
         return list;
     }
+    public Ncc findById(int maNCC) {
+
+        ResultSet rs = null;
+        Statement sttm = null;
+        try {
+            String sSQL = "SELECT * FROM NCC where maNCC='" + maNCC + "'";
+            con = DatabaseHelper.getDBConnect();
+            sttm = con.createStatement();
+            rs = sttm.executeQuery(sSQL);
+            while (rs.next()) {
+                Ncc ncc = new Ncc();
+                ncc.setMaNCC(rs.getInt(1));
+                ncc.setTenNCC(rs.getString(2));
+                ncc.setEmail(rs.getString(3));
+                ncc.setSdt(rs.getString(4));
+                return ncc;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.toString());
+        } finally {
+            try {
+                rs.close();
+                sttm.close();
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return null;
+    }
 
     public Integer AddNCC(Ncc n) {
         try {
@@ -71,8 +101,8 @@ public class NccRes {
             sttm.setString(2, n.getEmail());
             sttm.setString(3, n.getSdt());
             sttm.setString(4, String.valueOf(n.getMaNCC()));
-            int rowsAffected = sttm.executeUpdate();
-            if (rowsAffected > 0) {
+        
+            if (sttm.executeUpdate() > 0) {
                 return 1;
             }
         } catch (SQLException e) {

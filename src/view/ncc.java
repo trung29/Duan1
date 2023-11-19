@@ -22,13 +22,14 @@ public class ncc extends javax.swing.JInternalFrame {
      */
     private final NccRes dn = new NccRes();
     DefaultTableModel model = new DefaultTableModel();
-    
+    int idncc = -1;
+
     public ncc() {
         initComponents();
         model = (DefaultTableModel) tbl_NCC.getModel();
         fillTable();
     }
-    
+
     public void fillTable() {
         model.setRowCount(0);
         for (Ncc n : dn.getAllNCC()) {
@@ -38,16 +39,23 @@ public class ncc extends javax.swing.JInternalFrame {
             model.addRow(data);
         }
     }
-    
+
     public Ncc getModel() {
         Ncc n = new Ncc();
         n.setTenNCC(txtten.getText());
         n.setEmail(txt_email.getText());
         n.setSdt(txt_sdt.getText());
-        
+
         return n;
     }
-    
+
+    public void setModel(Ncc c) {
+        txtid.setText(String.valueOf(c.getMaNCC()));
+        txtten.setText(c.getTenNCC());
+        txt_email.setText(c.getEmail());
+        txt_sdt.setText(c.getSdt());
+    }
+
     public Ncc getModel_1() {
         Ncc n = new Ncc();
         n.setMaNCC(Integer.parseInt(txtid.getText()));
@@ -56,7 +64,7 @@ public class ncc extends javax.swing.JInternalFrame {
         n.setSdt(txt_sdt.getText());
         return n;
     }
-    
+
     public void clear() {
         txtid.setText("");
         txtten.setText("");
@@ -285,7 +293,7 @@ public class ncc extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Thêm mới thành công");
                 fillTable();
             } else {
-                
+
                 JOptionPane.showMessageDialog(this, "Thêm mới không thành công");
             }
         } catch (Exception e) {
@@ -294,17 +302,15 @@ public class ncc extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        Ncc n = getModel();
+        
         try {
+            Ncc n = getModel();
             if (dn.UpdateNCC(n) > 0) {
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công");
                 fillTable();
-            } else {
-                
-                JOptionPane.showMessageDialog(this, "Cập nhật không thành công");
-            }
+            } 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Error" + e.toString());
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -324,9 +330,15 @@ public class ncc extends javax.swing.JInternalFrame {
 
     private void tbl_NCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_NCCMouseClicked
         // TODO add your handling code here:
-        int index = tbl_NCC.getSelectedRow();
-        Ncc n = dn.getAllNCC().get(index);
-        showDetail(n);
+        txtid.setEnabled(false);
+        int position = tbl_NCC.rowAtPoint(evt.getPoint());
+        idncc = Integer.parseInt(tbl_NCC.getValueAt(position, 0).toString());
+        Ncc ncc = dn.findById(idncc);
+        if (ncc != null) {
+            setModel(ncc);
+        }
+
+
     }//GEN-LAST:event_tbl_NCCMouseClicked
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
