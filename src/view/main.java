@@ -315,8 +315,8 @@ public class main extends javax.swing.JFrame {
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         // TODO add your handling code here:
-             Client c1 = new Client();
-        jDesktopPane1.add(c1).setVisible(true);
+             Client c = new Client();
+        jDesktopPane1.add(c).setVisible(true);
     }//GEN-LAST:event_jLabel14MouseClicked
 
     public static void main(String args[]) {

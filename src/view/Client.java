@@ -425,24 +425,32 @@ public class Client extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatActionPerformed
-        model.Client c = getModel();
+        int index = tbl_KH.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng cần sửa.");
+            return;
+        }
 
-        if (cd.UpdateClient(c) > 0) {
+        
+        model.Client c = getModel_1();
+
+        int result = cd.UpdateClient(c);
+        if (result > 0) {
             JOptionPane.showMessageDialog(this, "Update thành công");
-            // Cập nhật bảng hiển thị thông tin sản phẩm
             fillTable();
         } else {
             JOptionPane.showMessageDialog(this, "Update thất bại");
         }
+
      }//GEN-LAST:event_btn_capnhatActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
- if (txt_id.getText().isEmpty()) {
+        if (txt_id.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn sản phẩm để xoá");
             return;
         }
 
-       model.Client c = getModel_1();
+        model.Client c = getModel_1();
         if (cd.Delete(c.getID()) > 0) {
             JOptionPane.showMessageDialog(this, "Delete thành công");
             fillTable();

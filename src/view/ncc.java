@@ -287,7 +287,6 @@ public class ncc extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         Ncc n = getModel();
-        System.out.println("HauNgu");
         try {
             if (dn.AddNCC(n) > 0) {
                 JOptionPane.showMessageDialog(this, "Thêm mới thành công");
@@ -302,7 +301,12 @@ public class ncc extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        
+         int index = tbl_NCC.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn nhà cung cấp cần sửa.");
+            return;
+        }
+
         try {
             Ncc n = getModel();
             if (dn.UpdateNCC(n) > 0) {

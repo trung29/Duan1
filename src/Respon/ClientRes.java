@@ -102,9 +102,10 @@ public class ClientRes {
         }
         return -1;
     }
-      public Integer Delete(int maKH) {
+
+    public Integer Delete(int maKH) {
         try {
-            System.out.println("Deleting product with ID: " + maKH); 
+            System.out.println("Deleting product with ID: " + maKH);
             String sql = "DELETE FROM khachhang WHERE MaKH = ?";
             con = DatabaseHelper.getDBConnect();
             pstmt = con.prepareStatement(sql);
@@ -117,7 +118,7 @@ public class ClientRes {
                 System.out.println("Xoa thanh cong");
                 return 1; // Xoá thành công
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
             e.printStackTrace();
         } finally {
