@@ -8,6 +8,7 @@ import Respon.ClientRes;
 import Respon.categoryRes;
 import Respon.productRes;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Category;
 import model.Product;
@@ -44,6 +45,7 @@ public class Client extends javax.swing.JInternalFrame {
 
             model.addRow(data);
         }
+        model.fireTableDataChanged(); // Notify the table model about the changes
     }
 
     public void showDetail(model.Client c) {
@@ -58,6 +60,27 @@ public class Client extends javax.swing.JInternalFrame {
         }
         txt_diem.setText(String.valueOf(c.getDieml()));
 
+    }
+
+    public model.Client getModel() {
+        model.Client c = new model.Client();
+        c.setName(txt_name.getText());
+        c.setEmail(txt_email.getText());
+        c.setSdt(txt_sdt.getText());
+        c.setDieml(Integer.parseInt(txt_diem.getText()));
+        c.setGioitinh(rdo_nam.isSelected() ? true : false);
+        return c;
+    }
+
+    public model.Client getModel_1() {
+        model.Client c = new model.Client();
+        c.setID(Integer.parseInt(txt_id.getText()));
+        c.setName(txt_name.getText());
+        c.setEmail(txt_email.getText());
+        c.setSdt(txt_sdt.getText());
+        c.setDieml(Integer.parseInt(txt_diem.getText()));
+        c.setGioitinh(rdo_nam.isSelected() ? true : false);
+        return c;
     }
 
     @SuppressWarnings("unchecked")
@@ -137,10 +160,25 @@ public class Client extends javax.swing.JInternalFrame {
         rdo_nu.setText("Nữ");
 
         btn_them.setText("Thêm");
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
 
         btn_capnhat.setText("Cập nhật");
+        btn_capnhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_capnhatActionPerformed(evt);
+            }
+        });
 
         btn_xoa.setText("Xoá");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
         btn_lammoi.setText("Làm mới");
 
@@ -367,13 +405,51 @@ public class Client extends javax.swing.JInternalFrame {
 
     private void tbl_KHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_KHMouseClicked
         // TODO add your handling code here:
-           int index = tbl_KH.getSelectedRow();
+        System.out.println("Table clicked!");
+        int index = tbl_KH.getSelectedRow();
         model.Client c = cd.getAllClient().get(index);
         showDetail(c);
-        
-        
-        
     }//GEN-LAST:event_tbl_KHMouseClicked
+
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+        model.Client c = getModel();
+
+        if (cd.AddClient(c) > 0) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            // Cập nhật bảng hiển thị thông tin sản phẩm
+            fillTable();
+        }
+
+
+    }//GEN-LAST:event_btn_themActionPerformed
+
+    private void btn_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatActionPerformed
+        model.Client c = getModel();
+
+        if (cd.UpdateClient(c) > 0) {
+            JOptionPane.showMessageDialog(this, "Update thành công");
+            // Cập nhật bảng hiển thị thông tin sản phẩm
+            fillTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Update thất bại");
+        }
+     }//GEN-LAST:event_btn_capnhatActionPerformed
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+ if (txt_id.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn sản phẩm để xoá");
+            return;
+        }
+
+       model.Client c = getModel_1();
+        if (cd.Delete(c.getID()) > 0) {
+            JOptionPane.showMessageDialog(this, "Delete thành công");
+            fillTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Delete thất bại");
+        }
+    }//GEN-LAST:event_btn_xoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
