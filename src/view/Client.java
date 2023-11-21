@@ -18,17 +18,17 @@ import model.Product;
  * @author ACER
  */
 public class Client extends javax.swing.JInternalFrame {
-
+    
     private final ClientRes cd = new ClientRes();
     DefaultTableModel model = new DefaultTableModel();
-
+    
     public Client() {
         initComponents();
         model = (DefaultTableModel) tbl_KH.getModel();
         fillTable();
-
+        
     }
-
+    
     public void fillTable() {
         model.setRowCount(0);
         for (model.Client c : cd.getAllClient()) {
@@ -38,16 +38,16 @@ public class Client extends javax.swing.JInternalFrame {
             } else {
                 gioiTinh = "Nu";
             }
-
+            
             Object data[] = {
                 c.getID(), c.getName(), c.getEmail(), c.getSdt(), gioiTinh, c.getDieml()
             };
-
+            
             model.addRow(data);
         }
         model.fireTableDataChanged(); // Notify the table model about the changes
     }
-
+    
     public void showDetail(model.Client c) {
         txt_id.setText(String.valueOf(c.getID()));
         txt_name.setText(c.getName());
@@ -59,9 +59,9 @@ public class Client extends javax.swing.JInternalFrame {
             rdo_nu.setSelected(true);
         }
         txt_diem.setText(String.valueOf(c.getDieml()));
-
+        
     }
-
+    
     public model.Client getModel() {
         model.Client c = new model.Client();
         c.setName(txt_name.getText());
@@ -71,7 +71,7 @@ public class Client extends javax.swing.JInternalFrame {
         c.setGioitinh(rdo_nam.isSelected() ? true : false);
         return c;
     }
-
+    
     public model.Client getModel_1() {
         model.Client c = new model.Client();
         c.setID(Integer.parseInt(txt_id.getText()));
@@ -81,6 +81,15 @@ public class Client extends javax.swing.JInternalFrame {
         c.setDieml(Integer.parseInt(txt_diem.getText()));
         c.setGioitinh(rdo_nam.isSelected() ? true : false);
         return c;
+    }
+
+    private void Clear() {
+        txt_id.setText("");
+        txt_email.setText("");
+        txt_name.setText("");
+        txt_diem.setText("");
+        txt_sdt.setText("");
+        rdo_nam.setSelected(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -181,6 +190,11 @@ public class Client extends javax.swing.JInternalFrame {
         });
 
         btn_lammoi.setText("Làm mới");
+        btn_lammoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_lammoiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -414,13 +428,13 @@ public class Client extends javax.swing.JInternalFrame {
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
         model.Client c = getModel();
-
+        
         if (cd.AddClient(c) > 0) {
             JOptionPane.showMessageDialog(this, "Thêm thành công");
             // Cập nhật bảng hiển thị thông tin sản phẩm
             fillTable();
         }
-
+        
 
     }//GEN-LAST:event_btn_themActionPerformed
 
@@ -430,10 +444,9 @@ public class Client extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng cần sửa.");
             return;
         }
-
         
         model.Client c = getModel_1();
-
+        
         int result = cd.UpdateClient(c);
         if (result > 0) {
             JOptionPane.showMessageDialog(this, "Update thành công");
@@ -449,7 +462,7 @@ public class Client extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn sản phẩm để xoá");
             return;
         }
-
+        
         model.Client c = getModel_1();
         if (cd.Delete(c.getID()) > 0) {
             JOptionPane.showMessageDialog(this, "Delete thành công");
@@ -458,6 +471,10 @@ public class Client extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Delete thất bại");
         }
     }//GEN-LAST:event_btn_xoaActionPerformed
+
+    private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
+        Clear();
+    }//GEN-LAST:event_btn_lammoiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -170,7 +170,7 @@ public class ncc extends javax.swing.JInternalFrame {
                 .addGap(270, 270, 270))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(35, 35, 35)
@@ -182,7 +182,7 @@ public class ncc extends javax.swing.JInternalFrame {
                         .addGap(38, 38, 38)
                         .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,14 +334,9 @@ public class ncc extends javax.swing.JInternalFrame {
 
     private void tbl_NCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_NCCMouseClicked
         // TODO add your handling code here:
-        txtid.setEnabled(false);
-        int position = tbl_NCC.rowAtPoint(evt.getPoint());
-        idncc = Integer.parseInt(tbl_NCC.getValueAt(position, 0).toString());
-        Ncc ncc = dn.findById(idncc);
-        if (ncc != null) {
-            setModel(ncc);
-        }
-
+           int index = tbl_NCC.getSelectedRow();
+       Ncc n  = dn.getAllNCC().get(index);
+        showDetail(n);
 
     }//GEN-LAST:event_tbl_NCCMouseClicked
 

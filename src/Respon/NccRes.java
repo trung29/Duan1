@@ -22,7 +22,7 @@ public class NccRes {
         ArrayList<Ncc> list = new ArrayList<>();
 
         try {
-            String sql = "SELECT *from NhaCC";
+            String sql = "SELECT * FROM NhaCC";
             con = DatabaseHelper.getDBConnect();
             sttm = con.prepareStatement(sql);
             rs = sttm.executeQuery();
