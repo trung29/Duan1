@@ -129,6 +129,10 @@ public class Client extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jPanel1.setBackground(new java.awt.Color(218, 212, 212));
 
         btn_search.setText("Tìm Kiếm");

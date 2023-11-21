@@ -110,6 +110,10 @@ public class staff extends javax.swing.JInternalFrame {
         jTextField10 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jLabel9.setText("Mã nv");
 
         jLabel10.setText("Tên nv");

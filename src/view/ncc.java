@@ -99,6 +99,10 @@ public class ncc extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_NCC = new javax.swing.JTable();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jPanel1.setBackground(new java.awt.Color(218, 212, 212));
 
         jPanel2.setBackground(new java.awt.Color(245, 239, 239));
